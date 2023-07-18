@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useLocalStorage } from "./useLocalStorage";
 
 const PresupuestoWeb = () => {
-  const [total, setTotal] = useState<number>(0);
-  const [numPaginas, setNumPaginas] = useState<number>(0);
-  const [numIdiomas, setNumIdiomas] = useState<number>(0);
-  const [extras, setExtras] = useState<boolean>(false);
-  const [seoChecked, setSeoChecked] = useState<boolean>(false);
-  const [adsChecked, setAdsChecked] = useState<boolean>(false);
+  const [total, setTotal] = useLocalStorage<number>('total', 0);
+  const [numPaginas, setNumPaginas] = useLocalStorage<number>('numPaginas', 0);
+  const [numIdiomas, setNumIdiomas] = useLocalStorage<number>('numIdiomas', 0);
+  const [extras, setExtras] = useLocalStorage<boolean>('extras', false);
+  const [seoChecked, setSeoChecked] = useLocalStorage<boolean>('seoChecked', false);
+  const [adsChecked, setAdsChecked] = useLocalStorage<boolean>('adsChecked', false);
+  const [webChecked, setWebChecked] = useLocalStorage<boolean>('webChecked', false);
 
   const PRECIO_PAGINAS = 30;
   const PRECIO_WEB = 500;
@@ -15,7 +17,7 @@ const PresupuestoWeb = () => {
 
   useEffect(() => {
     const precioPaginas = extras ? numPaginas * numIdiomas * PRECIO_PAGINAS : 0;
-    const precioWeb = extras ? PRECIO_WEB : 0;
+    const precioWeb = extras || webChecked ? PRECIO_WEB : 0;
     const precioSeo = seoChecked ? PRECIO_SEO : 0;
     const precioAds = adsChecked ? PRECIO_ADS : 0;
 
@@ -23,7 +25,7 @@ const PresupuestoWeb = () => {
     const totalValidado = Math.max(totalCalculado, 0);
 
     setTotal(totalValidado);
-  }, [numPaginas, numIdiomas, extras, seoChecked, adsChecked]);
+  }, [numPaginas, numIdiomas, extras, seoChecked, adsChecked, webChecked]);
 
   const handleNumPaginasChange = (increment: number) => {
     const newValue = numPaginas + increment;
@@ -54,7 +56,11 @@ const PresupuestoWeb = () => {
         <input
           type="checkbox"
           id="checkbox1"
-          onChange={() => setExtras(!extras)}
+          checked={webChecked}
+          onChange={() => {
+            setWebChecked(!webChecked);
+            setExtras(!extras);
+          }}
           className="mr-2"
         />
         <label htmlFor="checkbox1">Una página web (500€)</label>
