@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 type LocalStorageValue = [number, React.Dispatch<React.SetStateAction<number>>];
 export const useLocalStorage = (
   key: string,
-  defaultValue: number
+  defaultValue: number | boolean
 ): LocalStorageValue => {
   const stored: string | null = localStorage.getItem(key);
   const initial: number = stored ? JSON.parse(stored) : defaultValue;
