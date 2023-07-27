@@ -1,14 +1,6 @@
-import './App.css'
-import PresupuestoWeb from './components/presupuestoWeb'
+import "./App.css";
+import Routes from "./components/routes";
 
-const App = () => {
- 
+const App = () => <Routes />;
 
-  return (
-    <div>
-      <PresupuestoWeb />
-    </div>
-  )
-}
-
-export default App
+export default App;

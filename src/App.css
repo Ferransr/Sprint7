@@ -5,38 +5,125 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.welcome {
+  color: rgba(255, 255, 255, 0.851);
+  font-size: 75px;
+  margin: 0px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.textWelcome {
+  font-size: 20px;
+  margin-bottom: 50px;
 }
 
-.card {
-  padding: 2em;
+.presupuestoWeb {
+  color: rgba(255, 255, 255, 0.851);
+  text-decoration: none;
+  font-size: 25px;
 }
 
-.read-the-docs {
-  color: #888;
+.presupuestoWeb:hover {
+  color: #0432ff;
+}
+
+.home {
+  color: rgba(255, 255, 255, 0.851);
+  text-decoration: none;
+  font-size: 25px;
+}
+
+.home:hover {
+  color: #0432ff;
+}
+
+.btn-primary {
+  color: white;
+  background: none;
+  border: 2px solid rgba(255, 255, 255, 0.544);
+  border-radius: 10px;
+  padding: 3px 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+
+.containerText {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+.textNum {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: -15px;
+}
+
+.textNum2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.textNum label,
+.textNum2 label {
+  margin-left: 63px;
+  margin-right: 20px;
+}
+
+.mr-2 {
+  margin: 15px;
+}
+
+.infoPag {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.756);
+  font-size: 30px;
+  margin-left: 10px;
+}
+
+.infoPag:hover {
+  color: rgb(41, 48, 255);
+}
+
+.modal {
+  background: rgb(219, 219, 219);
+  border-radius: 10px;
+}
+
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.482);
+}
+
+.btnModal {
+  color: rgb(220, 220, 220);
+  background-color: rgb(0, 94, 255);
+  border: none;
+  font-weight: bold;
+  font-size: 15px;
+  width: 90px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.btnModal:hover {
+  background-color: rgb(0, 71, 193);
+}
+
+.btnModal:active {
+  transform: translateY(2px);
 }

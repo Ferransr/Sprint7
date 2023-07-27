@@ -1,5 +1,13 @@
 import React, { useEffect } from "react";
 import { useLocalStorage } from "./useLocalStorage";
+import { Link } from "react-router-dom";
+
+declare global {
+  interface Window {
+    mymodal2: any;
+    mymodal3: any;
+  }
+}
 
 const PresupuestoWeb = () => {
   const [total, setTotal] = useLocalStorage("total", 0);
@@ -54,82 +62,122 @@ const PresupuestoWeb = () => {
   };
 
   return (
-    <div className="container">
-      <h1 className="text-2xl">Qué quieres hacer?</h1>
-      <div>
-        <input
-          type="checkbox"
-          id="checkbox1"
-          checked={webChecked}
-          onChange={(e) => handleCheckboxChange(e, setWebChecked)}
-          className="mr-2"
-        />
-        <label htmlFor="checkbox1">Una página web (500€)</label>
-        {extras && (
-          <>
-            <div>
-              <label htmlFor="numPaginas">Número de páginas:</label>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => handleNumChange(1, setNumPaginas)}
-              >
-                +
-              </button>
-              <span className="mr-2 ml-2">{numPaginas}</span>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => handleNumChange(-1, setNumPaginas)}
-              >
-                -
-              </button>
-            </div>
-            <div>
-              <label htmlFor="numIdiomas">Número de idiomas:</label>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => handleNumChange(1, setNumIdiomas)}
-              >
-                +
-              </button>
-              <span className="mr-2 ml-2">{numIdiomas}</span>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => handleNumChange(-1, setNumIdiomas)}
-              >
-                -
-              </button>
-            </div>
-          </>
-        )}
+    <>
+      <div></div>
+      <div className="container">
+        <Link className="home" to="/">
+          Home
+        </Link>
+        <h1 className="text-2xl">Qué quieres hacer?</h1>
+        <div className="containerText">
+          <div>
+            <input
+              type="checkbox"
+              id="checkbox1"
+              checked={webChecked}
+              onChange={(e) => handleCheckboxChange(e, setWebChecked)}
+              className="mr-2"
+            />
+            <label htmlFor="checkbox1">Una página web (500€)</label>
+            {extras && (
+              <>
+                <div className="textNum">
+                  <label htmlFor="numPaginas">Número de páginas:</label>
+                  <button
+                    type="button"
+                    className="btn-primary"
+                    onClick={() => handleNumChange(1, setNumPaginas)}
+                  >
+                    +
+                  </button>
+                  <span className="mr-2 ml-2">{numPaginas}</span>
+                  <button
+                    type="button"
+                    className="btn-primary"
+                    onClick={() => handleNumChange(-1, setNumPaginas)}
+                  >
+                    -
+                  </button>
+                  <button
+                    className="infoPag"
+                    onClick={() => window.mymodal2.showModal()}
+                  >
+                    ℹ
+                  </button>
+                  <dialog id="mymodal2" className="modal">
+                    <form method="dialog" className="modal-box">
+                      <h3 className="font-bold text-lg"></h3>
+                      <p className="py-4">
+                      Indique el número de páginas que quiere para su web
+                      </p>
+                    </form>
+                    <form method="dialog" className="modal-backdrop">
+                      <button className="btnModal">cerrar</button>
+                    </form>
+                  </dialog>
+                </div>
+                <div className="textNum2">
+                  <label htmlFor="numIdiomas">Número de idiomas:</label>
+                  <button
+                    type="button"
+                    className="btn-primary"
+                    onClick={() => handleNumChange(1, setNumIdiomas)}
+                  >
+                    +
+                  </button>
+                  <span className="mr-2 ml-2">{numIdiomas}</span>
+                  <button
+                    type="button"
+                    className="btn-primary"
+                    onClick={() => handleNumChange(-1, setNumIdiomas)}
+                  >
+                    -
+                  </button>
+                  <button
+                    className="infoPag"
+                    onClick={() => window.mymodal3.showModal()}
+                  >
+                    ℹ
+                  </button>
+                  <dialog id="mymodal3" className="modal">
+                    <form method="dialog" className="modal-box">
+                      <h3 className="font-bold text-lg"></h3>
+                      <p className="py-4">Indique el número de idiomas que quiere para su web</p>
+                    </form>
+                    <form method="dialog" className="modal-backdrop">
+                      <button className="btnModal">cerrar</button>
+                    </form>
+                  </dialog>
+                </div>
+              </>
+            )}
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="checkbox2"
+              checked={seoChecked}
+              onChange={(e) => setSeoChecked(e.target.checked)}
+              className="mr-2"
+            />
+            <label htmlFor="checkbox2">Una consultoría SEO (300€)</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="checkbox3"
+              checked={adsChecked}
+              onChange={(e) => setAdsChecked(e.target.checked)}
+              className="mr-2"
+            />
+            <label htmlFor="checkbox3">Una campaña de Google Ads (200€)</label>
+          </div>
+        </div>
+        <h2 className="mt-4">
+          Precio: <span id="total">{total}€</span>
+        </h2>
       </div>
-      <div>
-        <input
-          type="checkbox"
-          id="checkbox2"
-          checked={seoChecked}
-          onChange={(e) => setSeoChecked(e.target.checked)}
-          className="mr-2"
-        />
-        <label htmlFor="checkbox2">Una consultoría SEO (300€)</label>
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          id="checkbox3"
-          checked={adsChecked}
-          onChange={(e) => setAdsChecked(e.target.checked)}
-          className="mr-2"
-        />
-        <label htmlFor="checkbox3">Una campaña de Google Ads (200€)</label>
-      </div>
-      <h2 className="mt-4">
-        Precio: <span id="total">{total}€</span>
-      </h2>
-    </div>
+    </>
   );
 };
 
